@@ -33,4 +33,4 @@ HEADERS += \
     background_thread.h
 
 FORMS += \
-        mainwindow.ui
+    mainwindow.ui
