@@ -22,7 +22,11 @@ background_thread::background_thread() : thread([this] {
     enqueue_callback();
 
     lg.unlock();
-    work(new_pattern, new_filename);
+    try {
+      work(new_pattern, new_filename);
+    } catch (std::exception const& e) {
+      std::cerr << e.what() << '\n';
+    }
     lg.lock();
 
     current_result.incomplete = cancel.load();
@@ -60,7 +64,6 @@ void background_thread::process() {
     return;
   }
   has_work = true;
-  cancel.store(false);
   pattern = future_pattern;
   filename = future_filename;
   has_work_cv.notify_all();
@@ -99,18 +102,18 @@ void background_thread::work(QString const& p, QString const& path) {
   QDir directory(path);
   if (directory.exists()) {
     QDirIterator it(path,
-                    QDir::Dirs
-                    | QDir::AllEntries
-                    | QDir::Files
-                    | QDir::NoSymLinks
-                    | QDir::NoDotAndDotDot
-                    | QDir::Readable,
+                    QDir::Files | QDir::NoSymLinks | QDir::Dirs |
+                    QDir::AllEntries | QDir::NoDotAndDotDot | QDir::Readable,
                     QDirIterator::Subdirectories);
     while (it.hasNext()) {
       if (cancel.load()) {
         return;
       }
-      work(p, it.next());
+      try {
+        work(p, it.next());
+      } catch (std::exception const& e) {
+        std::cerr << e.what() << '\n';
+      }
     }
   }
   std::vector<int> pref;
