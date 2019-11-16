@@ -30,7 +30,8 @@ class background_thread : public QObject {
     result_t() = default;
 
     std::vector<QString> occurrences;
-    size_t found{};
+    size_t found_matches{};
+    size_t completed_files{};
     bool incomplete{};
   };
 

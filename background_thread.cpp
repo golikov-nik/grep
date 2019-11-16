@@ -17,7 +17,8 @@ background_thread::background_thread() : thread([this] {
 
     current_result.incomplete = true;
     current_result.occurrences.clear();
-    current_result.found = 0;
+    current_result.found_matches = 0;
+    current_result.completed_files = 0;
     enqueue_callback();
 
     lg.unlock();
@@ -162,7 +163,7 @@ void background_thread::work(QString const& p, QString const& path) {
       }
       if (add_char(ch) == p_size) {
         std::unique_lock<std::mutex> lg(m);
-        ++current_result.found;
+        ++current_result.found_matches;
         if (current_result.occurrences.size() < MAX_RESULTS) {
           QString res = QString("%1 %2:%3").arg(path,
                                                 QString::number(line_number),
@@ -174,4 +175,7 @@ void background_thread::work(QString const& p, QString const& path) {
       ++pos;
     }
   }
+  std::unique_lock<std::mutex> lg(m);
+  ++current_result.completed_files;
+  enqueue_callback();
 }

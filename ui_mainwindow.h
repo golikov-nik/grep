@@ -19,131 +19,141 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenu>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MainWindow
+class Ui_grep
 {
  public:
   QWidget *centralWidget;
   QGridLayout *gridLayout;
-  QLineEdit *fileEdit;
-  QPushButton *searchButton;
-  QLineEdit *countEdit;
-  QLabel *label_2;
-  QListWidget *listWidget;
-  QLabel *label;
-  QLabel *label_3;
-  QLineEdit *patternEdit;
   QPushButton *stopButton;
-  QMenuBar *menuBar;
-  QMenu *menugrep;
+  QLabel *label_2;
+  QLabel *label_3;
+  QTextBrowser *infoBrowser;
+  QPushButton *fileBrowseButton;
+  QLabel *label;
+  QLineEdit *patternEdit;
+  QLineEdit *fileEdit;
+  QPushButton *directoryBrowseButton;
+  QPushButton *searchButton;
+  QListWidget *listWidget;
+  QLabel *label_4;
   QToolBar *mainToolBar;
   QStatusBar *statusBar;
   QToolBar *toolBar;
 
-  void setupUi(QMainWindow *MainWindow)
+  void setupUi(QMainWindow *grep)
   {
-    if (MainWindow->objectName().isEmpty())
-      MainWindow->setObjectName(QStringLiteral("MainWindow"));
-    MainWindow->resize(489, 382);
-    centralWidget = new QWidget(MainWindow);
+    if (grep->objectName().isEmpty())
+      grep->setObjectName(QStringLiteral("grep"));
+    grep->resize(698, 521);
+    centralWidget = new QWidget(grep);
     centralWidget->setObjectName(QStringLiteral("centralWidget"));
     gridLayout = new QGridLayout(centralWidget);
     gridLayout->setSpacing(6);
     gridLayout->setContentsMargins(11, 11, 11, 11);
     gridLayout->setObjectName(QStringLiteral("gridLayout"));
+    stopButton = new QPushButton(centralWidget);
+    stopButton->setObjectName(QStringLiteral("stopButton"));
+
+    gridLayout->addWidget(stopButton, 3, 1, 1, 1);
+
+    label_2 = new QLabel(centralWidget);
+    label_2->setObjectName(QStringLiteral("label_2"));
+
+    gridLayout->addWidget(label_2, 0, 1, 1, 1);
+
+    label_3 = new QLabel(centralWidget);
+    label_3->setObjectName(QStringLiteral("label_3"));
+
+    gridLayout->addWidget(label_3, 4, 0, 1, 1);
+
+    infoBrowser = new QTextBrowser(centralWidget);
+    infoBrowser->setObjectName(QStringLiteral("infoBrowser"));
+
+    gridLayout->addWidget(infoBrowser, 11, 0, 2, 2);
+
+    fileBrowseButton = new QPushButton(centralWidget);
+    fileBrowseButton->setObjectName(QStringLiteral("fileBrowseButton"));
+
+    gridLayout->addWidget(fileBrowseButton, 3, 0, 1, 1);
+
+    label = new QLabel(centralWidget);
+    label->setObjectName(QStringLiteral("label"));
+
+    gridLayout->addWidget(label, 8, 0, 1, 1);
+
+    patternEdit = new QLineEdit(centralWidget);
+    patternEdit->setObjectName(QStringLiteral("patternEdit"));
+
+    gridLayout->addWidget(patternEdit, 1, 1, 1, 1);
+
     fileEdit = new QLineEdit(centralWidget);
     fileEdit->setObjectName(QStringLiteral("fileEdit"));
 
     gridLayout->addWidget(fileEdit, 1, 0, 1, 1);
 
+    directoryBrowseButton = new QPushButton(centralWidget);
+    directoryBrowseButton->setObjectName(QStringLiteral("directoryBrowseButton"));
+
+    gridLayout->addWidget(directoryBrowseButton, 2, 0, 1, 1);
+
     searchButton = new QPushButton(centralWidget);
     searchButton->setObjectName(QStringLiteral("searchButton"));
 
-    gridLayout->addWidget(searchButton, 4, 0, 1, 1);
-
-    countEdit = new QLineEdit(centralWidget);
-    countEdit->setObjectName(QStringLiteral("countEdit"));
-
-    gridLayout->addWidget(countEdit, 8, 0, 1, 1);
-
-    label_2 = new QLabel(centralWidget);
-    label_2->setObjectName(QStringLiteral("label_2"));
-
-    gridLayout->addWidget(label_2, 2, 0, 1, 1);
+    gridLayout->addWidget(searchButton, 2, 1, 1, 1);
 
     listWidget = new QListWidget(centralWidget);
     listWidget->setObjectName(QStringLiteral("listWidget"));
 
-    gridLayout->addWidget(listWidget, 7, 0, 1, 1);
+    gridLayout->addWidget(listWidget, 5, 0, 2, 2);
 
-    label = new QLabel(centralWidget);
-    label->setObjectName(QStringLiteral("label"));
+    label_4 = new QLabel(centralWidget);
+    label_4->setObjectName(QStringLiteral("label_4"));
 
-    gridLayout->addWidget(label, 0, 0, 1, 1);
+    gridLayout->addWidget(label_4, 0, 0, 1, 1);
 
-    label_3 = new QLabel(centralWidget);
-    label_3->setObjectName(QStringLiteral("label_3"));
-
-    gridLayout->addWidget(label_3, 6, 0, 1, 1);
-
-    patternEdit = new QLineEdit(centralWidget);
-    patternEdit->setObjectName(QStringLiteral("patternEdit"));
-
-    gridLayout->addWidget(patternEdit, 3, 0, 1, 1);
-
-    stopButton = new QPushButton(centralWidget);
-    stopButton->setObjectName(QStringLiteral("stopButton"));
-
-    gridLayout->addWidget(stopButton, 5, 0, 1, 1);
-
-    MainWindow->setCentralWidget(centralWidget);
-    menuBar = new QMenuBar(MainWindow);
-    menuBar->setObjectName(QStringLiteral("menuBar"));
-    menuBar->setGeometry(QRect(0, 0, 489, 22));
-    menugrep = new QMenu(menuBar);
-    menugrep->setObjectName(QStringLiteral("menugrep"));
-    MainWindow->setMenuBar(menuBar);
-    mainToolBar = new QToolBar(MainWindow);
+    grep->setCentralWidget(centralWidget);
+    mainToolBar = new QToolBar(grep);
     mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-    MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
-    statusBar = new QStatusBar(MainWindow);
+    grep->addToolBar(Qt::TopToolBarArea, mainToolBar);
+    statusBar = new QStatusBar(grep);
     statusBar->setObjectName(QStringLiteral("statusBar"));
-    MainWindow->setStatusBar(statusBar);
-    toolBar = new QToolBar(MainWindow);
+    grep->setStatusBar(statusBar);
+    toolBar = new QToolBar(grep);
     toolBar->setObjectName(QStringLiteral("toolBar"));
-    MainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
+    grep->addToolBar(Qt::TopToolBarArea, toolBar);
 
-    menuBar->addAction(menugrep->menuAction());
+    retranslateUi(grep);
 
-    retranslateUi(MainWindow);
-
-    QMetaObject::connectSlotsByName(MainWindow);
+    QMetaObject::connectSlotsByName(grep);
   } // setupUi
 
-  void retranslateUi(QMainWindow *MainWindow)
+  void retranslateUi(QMainWindow *grep)
   {
-    MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
-    searchButton->setText(QApplication::translate("MainWindow", "Run", Q_NULLPTR));
-    label_2->setText(QApplication::translate("MainWindow", "Pattern", Q_NULLPTR));
-    label->setText(QApplication::translate("MainWindow", "Input file", Q_NULLPTR));
-    label_3->setText(QApplication::translate("MainWindow", "Result", Q_NULLPTR));
-    stopButton->setText(QApplication::translate("MainWindow", "Stop", Q_NULLPTR));
-    menugrep->setTitle(QApplication::translate("MainWindow", "grep", Q_NULLPTR));
-    toolBar->setWindowTitle(QApplication::translate("MainWindow", "toolBar", Q_NULLPTR));
+    grep->setWindowTitle(QApplication::translate("grep", "grep", Q_NULLPTR));
+    stopButton->setText(QApplication::translate("grep", "Stop", Q_NULLPTR));
+    label_2->setText(QApplication::translate("grep", "Pattern", Q_NULLPTR));
+    label_3->setText(QApplication::translate("grep", "Result", Q_NULLPTR));
+    fileBrowseButton->setText(QApplication::translate("grep", "Select file", Q_NULLPTR));
+    label->setText(QApplication::translate("grep", "Statistics", Q_NULLPTR));
+    fileEdit->setText(QString());
+    directoryBrowseButton->setText(QApplication::translate("grep", "Select directory", Q_NULLPTR));
+    searchButton->setText(QApplication::translate("grep", "Run", Q_NULLPTR));
+    label_4->setText(QApplication::translate("grep", "Search in...", Q_NULLPTR));
+    toolBar->setWindowTitle(QApplication::translate("grep", "toolBar", Q_NULLPTR));
   } // retranslateUi
 
 };
 
 namespace Ui {
-  class MainWindow: public Ui_MainWindow {};
+  class grep: public Ui_grep {};
 } // namespace Ui
 
 QT_END_NAMESPACE

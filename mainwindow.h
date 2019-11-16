@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "background_thread.h"
+#include "ui_mainwindow.h"
 
 namespace Ui {
   class MainWindow;
@@ -17,7 +18,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow() override;
 
  private:
-  Ui::MainWindow* ui;
+  Ui::grep* ui;
   background_thread bg_thread;
 };
 
